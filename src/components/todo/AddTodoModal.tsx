@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -9,15 +10,23 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { addTodo } from "@/redux/features/todoSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { FormEvent, useState } from "react";
 
 export function AddTodoModal() {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
+  const dispatch = useAppDispatch();
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(task, description);
+    const tastDetails = {
+      title: task,
+      description: description,
+    };
+
+    dispatch(addTodo(tastDetails));
   };
 
   return (
@@ -56,7 +65,9 @@ export function AddTodoModal() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button type="submit">Save task</Button>
+            <DialogClose asChild>
+              <Button type="submit">Save task</Button>
+            </DialogClose>
           </div>
         </form>
       </DialogContent>
