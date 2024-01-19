@@ -1,10 +1,15 @@
-export default function TodoCard() {
+type TTodoCardProps = {
+  title: string;
+  description: string;
+};
+
+export default function TodoCard({ title, description }: TTodoCardProps) {
   return (
     <div className="bg-white flex items-center justify-between p-2 rounded-md">
       <input type="checkbox" name="" id="" />
-      <p className="font-medium">Todo Title</p>
-      <p className="font-medium">Time</p>
-      <p className="font-medium">Description</p>
+      <p className="font-medium">{title}</p>
+      {/* <p className="font-medium">Time</p> */}
+      <p className="font-medium">{description}</p>
       <div className="space-x-5">
         <button className="bg-slate-400 px-2 py-1 rounded-md text-white">
           <svg

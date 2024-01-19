@@ -21,12 +21,15 @@ export function AddTodoModal() {
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const tastDetails = {
+    const randomString = Math.random().toString(32).substring(2, 7);
+    const taskDetails = {
+      id: randomString,
       title: task,
       description: description,
     };
 
-    dispatch(addTodo(tastDetails));
+    // console.log(taskDetails);
+    dispatch(addTodo(taskDetails));
   };
 
   return (
