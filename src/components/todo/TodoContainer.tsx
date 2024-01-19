@@ -1,18 +1,18 @@
-import { useAppSelector } from "@/redux/hooks";
 import { AddTodoModal } from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import { TodoFilter } from "./TodoFilter";
+import { useGetTodosQuery } from "@/redux/api/api";
 
 export default function TodoContainer() {
   // from local state
-  const { todos } = useAppSelector((state) => state.todos);
+  // const { todos } = useAppSelector((state) => state.todos);
 
   // from server
-  // const { data: todos, isLoading, isError } = useGetTodosQuery(undefined);
+  const { data: todos, isLoading, isError } = useGetTodosQuery(undefined);
 
-  // if (isLoading) {
-  //   return <p>Loading...</p>;
-  // }
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -25,8 +25,8 @@ export default function TodoContainer() {
           <p>There is no task pending</p>
         </div> */}
         <div className="bg-white w-full h-full rounded-lg space-y-2">
-          {todos.map((todo) => (
-            <TodoCard key={todo.id} {...todo} />
+          {todos?.data?.map((todo) => (
+            <TodoCard key={todo._id} {...todo} />
           ))}
         </div>
       </div>

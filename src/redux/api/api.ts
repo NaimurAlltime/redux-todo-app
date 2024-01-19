@@ -6,16 +6,19 @@ export const baseApi = createApi({
   endpoints: (builder) => ({
     getTodos: builder.query({
       query: () => ({
-        url: "/task",
+        url: "/tasks",
         method: "GET",
       }),
     }),
     addTodos: builder.mutation({
-      query: (data) => ({
-        url: "/task",
-        method: "POST",
-        body: data,
-      }),
+      query: (data) => {
+        console.log("api:", data);
+        return {
+          url: "/task",
+          method: "POST",
+          body: data,
+        };
+      },
     }),
   }),
 });

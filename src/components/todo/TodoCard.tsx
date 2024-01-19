@@ -5,6 +5,7 @@ type TTodoCardProps = {
   id: string;
   title: string;
   description: string;
+  priority: "high" | "medium" | "low";
   isCompleted?: boolean;
 };
 
@@ -13,6 +14,7 @@ export default function TodoCard({
   description,
   id,
   isCompleted,
+  priority,
 }: TTodoCardProps) {
   const dispatch = useAppDispatch();
 
@@ -30,6 +32,7 @@ export default function TodoCard({
       />
       <p className="font-medium">{title}</p>
       {/* <p className="font-medium">Time</p> */}
+      <p>{priority}</p>
       <div>
         {isCompleted ? (
           <p className="text-green-400">done</p>
