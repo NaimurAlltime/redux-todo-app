@@ -4,7 +4,16 @@ import TodoCard from "./TodoCard";
 import { TodoFilter } from "./TodoFilter";
 
 export default function TodoContainer() {
+  // from local state
   const { todos } = useAppSelector((state) => state.todos);
+
+  // from server
+  // const { data: todos, isLoading, isError } = useGetTodosQuery(undefined);
+
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
+
   return (
     <div>
       <div className="flex justify-between mb-4">
