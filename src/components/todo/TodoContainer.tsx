@@ -17,11 +17,7 @@ export default function TodoContainer() {
         </div> */}
         <div className="bg-white w-full h-full rounded-lg space-y-2">
           {todos.map((todo) => (
-            <TodoCard
-              key={todo.id}
-              title={todo.title}
-              description={todo.description}
-            />
+            <TodoCard key={todo.id} {...todo} />
           ))}
         </div>
       </div>
