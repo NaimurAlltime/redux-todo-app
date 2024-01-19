@@ -8,7 +8,7 @@ export default function TodoContainer() {
   // const { todos } = useAppSelector((state) => state.todos);
 
   // from server
-  const { data: todos, isLoading, isError } = useGetTodosQuery(undefined);
+  const { data: todos, isLoading } = useGetTodosQuery(undefined);
 
   if (isLoading) {
     return <p>Loading...</p>;
