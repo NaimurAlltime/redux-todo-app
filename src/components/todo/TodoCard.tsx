@@ -1,8 +1,7 @@
-import { removeTodo, toggleComplete } from "@/redux/features/todoSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useUpdateTodosMutation } from "@/redux/api/api";
 
-type TTodoCardProps = {
-  id: string;
+export type TTodoCardProps = {
+  _id: string;
   title: string;
   description: string;
   priority: "high" | "medium" | "low";
@@ -12,27 +11,53 @@ type TTodoCardProps = {
 export default function TodoCard({
   title,
   description,
-  id,
+  _id,
   isCompleted,
   priority,
 }: TTodoCardProps) {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const [updateTodo, { isLoading }] = useUpdateTodosMutation();
 
   const handleToggleComplete = () => {
-    dispatch(toggleComplete(id));
+    // dispatch(toggleComplete(_id));
+    const taskData = {
+      title,
+      description,
+      priority,
+      isCompleted: !isCompleted,
+    };
+
+    const options = {
+      id: _id,
+      data: taskData,
+    };
+
+    updateTodo(options);
   };
 
   return (
     <div className="bg-white flex items-center justify-between p-2 rounded-md">
       <input
         onChange={handleToggleComplete}
+        defaultChecked={isCompleted}
         type="checkbox"
         name="complete"
         id="complete"
       />
       <p className="font-medium">{title}</p>
       {/* <p className="font-medium">Time</p> */}
-      <p>{priority}</p>
+      <div className="flex justify-center items-center">
+        <p
+          className={`
+        size-3 rounded-full mr-2
+        ${priority == "high" ? "bg-red-400" : null}
+        ${priority == "medium" ? "bg-yellow-400" : null}
+        ${priority == "low" ? "bg-green-400" : null}
+      `}
+        ></p>
+        <p>{priority}</p>
+      </div>
+      {/* <p></p> */}
       <div>
         {isCompleted ? (
           <p className="text-green-400">done</p>
@@ -54,7 +79,7 @@ export default function TodoCard({
           </svg>
         </button>
         <button
-          onClick={() => dispatch(removeTodo(id))}
+          // onClick={() => dispatch(removeTodo(_id))}
           className="bg-red-500 px-2 py-1 rounded-md text-white"
         >
           <svg

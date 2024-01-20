@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AddTodoModal } from "./AddTodoModal";
-import TodoCard from "./TodoCard";
+import TodoCard, { TTodoCardProps } from "./TodoCard";
 import { TodoFilter } from "./TodoFilter";
 import { useGetTodosQuery } from "@/redux/api/api";
 
@@ -27,7 +27,7 @@ export default function TodoContainer() {
           <p>There is no task pending</p>
         </div> */}
         <div className="bg-white w-full h-full rounded-lg space-y-2">
-          {todos?.data?.map((todo) => (
+          {todos?.data?.map((todo: TTodoCardProps) => (
             <TodoCard key={todo._id} {...todo} />
           ))}
         </div>
