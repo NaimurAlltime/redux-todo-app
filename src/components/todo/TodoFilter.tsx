@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +8,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function TodoFilter() {
-  const [position, setPosition] = React.useState("bottom");
+type TpriorityProps = {
+  priority: string;
+  setPriority: void | any;
+};
 
+export function TodoFilter({ priority, setPriority }: TpriorityProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,7 +24,7 @@ export function TodoFilter() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Filter by priority</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+        <DropdownMenuRadioGroup value={priority} onValueChange={setPriority}>
           <DropdownMenuRadioItem value="high">High</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="medium">Medium</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="low">low</DropdownMenuRadioItem>
